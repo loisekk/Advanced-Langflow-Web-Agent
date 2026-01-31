@@ -15,7 +15,6 @@ This project demonstrates **real-world agent orchestration**, **prompt engineeri
 * 🧵 **Community insight mining** from Reddit posts & comments
 * 🧩 **Clean prompt engineering architecture**
 * 💬 **CLI-based interactive research assistant**
-
 ---
 
 ## 🏗️ System Architecture
