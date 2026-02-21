@@ -5,7 +5,7 @@ A **multi-source AI research agent** that performs **parallel web intelligence g
 This project demonstrates **real-world agent orchestration**, **prompt engineering**, **web scraping pipelines**, and **LLM-powered reasoning** using **LangGraph**, **OpenRouter**, and **Bright Data APIs**.
 
 ---
-
+ 
 ## ✨ Key Highlights
 
 * 🔄 **Parallel agent workflow** using LangGraph (Google, Bing, Reddit)
