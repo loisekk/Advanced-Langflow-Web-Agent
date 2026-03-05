@@ -18,7 +18,6 @@ Analyze the provided Reddit results and identify URLs of posts that contain valu
 Return a structured response with the selected URLs."""
         
     
-
     @staticmethod # dcr
     def reddit_url_analysis_user(user_question: str, reddit_results: str) -> str:
         """User prompt for analyzing Reddit URLs."""
