@@ -107,6 +107,7 @@ Please analyze this Reddit content and extract community insights, user experien
         """System prompt for synthesizing all analyses."""
         return """You are an expert research synthesizer. Combine the provided analyses from different sources to create a comprehensive, well-structured answer.
 
+
 Your task:
 - Synthesize insights from Google, Bing, and Reddit analyses
 - Identify common themes and conflicting information
