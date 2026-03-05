@@ -117,6 +117,7 @@ Your task:
 
 Create a comprehensive answer that addresses the user's question from multiple angles."""
 
+    
     @staticmethod
     def synthesis_user(
         user_question: str,
