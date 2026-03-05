@@ -1,7 +1,6 @@
 # Python-generated files
 __pycache__/
 
-
 # Virtual environments
 .venv
 brightdata_api_work
@@ -9,3 +8,4 @@ main_V1.py
 main_V2.py
 main_prototype.py
 main_upgraded.py
+
