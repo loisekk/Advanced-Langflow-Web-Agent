@@ -139,7 +139,6 @@ Reddit Community Analysis: {reddit_analysis}
 
 Please synthesize these analyses into a comprehensive answer that addresses the question from multiple perspectives."""
 
-
 def create_message_pair(system_prompt: str, user_prompt: str) -> list[Dict[str, Any]]:
     """
     Create a standardized message pair for LLM interactions.
