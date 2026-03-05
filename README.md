@@ -1,124 +1,176 @@
-# 🚀 Advanced Langflow Web Agent
+<div align="center">
 
-A **multi-source AI research agent** that performs **parallel web intelligence gathering** across **Google, Bing, and Reddit**, analyzes each source independently using LLMs, and synthesizes the results into a **single, high-quality answer**.
+# 🕵️ Advanced Langflow Web Agent
 
-This project demonstrates **real-world agent orchestration**, **prompt engineering**, **web scraping pipelines**, and **LLM-powered reasoning** using **LangGraph**, **OpenRouter**, and **Bright Data APIs**.
+**A production-grade, multi-source AI research agent powered by LangGraph, OpenRouter, and Bright Data.**
+
+*Parallel intelligence gathering · Source-aware LLM reasoning · Structured synthesis*
 
 ---
- 
-## ✨ Key Highlights
 
-* 🔄 **Parallel agent workflow** using LangGraph (Google, Bing, Reddit)
-* 🧠 **Source-specific LLM analysis** for higher accuracy
-* 📊 **Structured Reddit URL filtering** using Pydantic
-* 🌐 **Production-grade web scraping** via Bright Data
-* 🧵 **Community insight mining** from Reddit posts & comments
-* 🧩 **Clean prompt engineering architecture**
-* 💬 **CLI-based interactive research assistant**
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Orchestration-1C3C3C?style=flat-square&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-DeepSeek--R1-6E3FF3?style=flat-square)](https://openrouter.ai)
+[![Bright Data](https://img.shields.io/badge/Bright%20Data-Web%20Intelligence-00BFFF?style=flat-square)](https://brightdata.com)
+[![Pydantic](https://img.shields.io/badge/Pydantic-Structured%20Outputs-E92063?style=flat-square&logo=pydantic&logoColor=white)](https://docs.pydantic.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-22c55e?style=flat-square)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-orange?style=flat-square)](https://github.com/YOUR-USERNAME/Advanced-Langflow-Web-Agent/pulls)
+
+---
+
+[📖 Overview](#-overview) · [🏗️ Architecture](#-system-architecture) · [⚙️ How It Works](#-how-it-works) · [🚀 Quick Start](#-quick-start) · [📂 Structure](#-project-structure) · [🗺️ Roadmap](#-roadmap)
+
+</div>
+
+---
+
+## 📖 Overview
+
+Most AI assistants answer from a single source — often stale, often biased, and frequently hallucinated.
+
+**This project takes a different approach.**
+
+It deploys three specialized research agents in parallel — each scraping, filtering, and reasoning over a distinct data source (Google, Bing, Reddit) — then funnels their independent analyses into a final synthesis agent that reconciles conflicts and delivers a well-grounded, multi-perspective answer.
+
+> Built to demonstrate real-world agentic AI design: parallel execution, structured LLM outputs, source-specific prompt engineering, and fault-tolerant scraping pipelines.
+
+---
+
+## ⚡ Key Capabilities
+
+| Capability | Details |
+|---|---|
+| 🔄 Parallel Agent Execution | Google, Bing, and Reddit agents run simultaneously via LangGraph |
+| 🧠 Source-Aware LLM Reasoning | Each source uses dedicated prompts tuned for its content type |
+| 📊 Structured Reddit Filtering | Pydantic-validated LLM output selects only high-signal posts |
+| 🌐 Production Web Scraping | Bright Data SERP & snapshot APIs for reliable data ingestion |
+| 🧵 Community Insight Mining | Extracts real user opinions from Reddit threads & comments |
+| 🧩 Modular Prompt Architecture | Centralized, versioned prompt templates in `prompts.py` |
+| 💬 Interactive CLI Interface | Conversational research assistant, runnable locally |
+
 ---
 
 ## 🏗️ System Architecture
 
-### High-Level Architecture (ASCII)
+### Agent Flow
 
 ```
-┌──────────────────┐
-│   User (CLI)     │
-└────────┬─────────┘
-         │ Question
-         ▼
-┌────────────────────────┐
-│ LangGraph Orchestrator │
-│ (State + Parallelism)  │
-└────────┬───────┬───────┘
-         │       │
- ┌───────▼───┐ ┌─▼────────┐ ┌─────────────▼─────┐
- │ Google     │ │ Bing     │ │ Reddit             │
- │ Search     │ │ Search   │ │ Search              │
- └───────┬───┘ └─┬────────┘ └────────┬───────────┘
-         │       │                     │
- ┌───────▼───┐ ┌─▼────────┐   ┌────────▼────────┐
- │ Google     │ │ Bing     │   │ URL Selection    │
- │ Analysis   │ │ Analysis │   │ (Structured LLM) │
- └───────┬───┘ └─┬────────┘   └────────┬────────┘
-         │       │                     │
-         │       │              ┌──────▼────────┐
-         │       │              │ Post & Comment │
-         │       │              │ Retrieval      │
-         │       │              └──────┬────────┘
-         │       │                     │
-         │       │              ┌──────▼────────┐
-         │       │              │ Reddit Analysis│
-         │       │              └──────┬────────┘
-         │       │                     │
-         └───────┴───────────────┬─────┘
-                                 ▼
-                      ┌────────────────────┐
-                      │ Synthesis Agent    │
-                      │ (LLM Reasoning)    │
-                      └─────────┬──────────┘
-                                ▼
-                     ┌─────────────────────┐
-                     │ Final Answer Output │
-                     └─────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│                        User (CLI)                        │
+└─────────────────────────┬───────────────────────────────┘
+                          │  Query
+                          ▼
+┌─────────────────────────────────────────────────────────┐
+│              LangGraph Orchestrator                      │
+│         (State Management · Parallel Dispatch)          │
+└──────────┬──────────────┬──────────────┬───────────────┘
+           │              │              │
+    ┌──────▼──────┐ ┌─────▼─────┐ ┌─────▼──────────────┐
+    │ Google      │ │ Bing      │ │ Reddit              │
+    │ Search      │ │ Search    │ │ Search              │
+    └──────┬──────┘ └─────┬─────┘ └─────┬──────────────┘
+           │              │              │
+    ┌──────▼──────┐ ┌─────▼─────┐ ┌─────▼──────────────┐
+    │ Google LLM  │ │ Bing LLM  │ │ URL Selection       │
+    │ Analysis    │ │ Analysis  │ │ (Structured LLM)    │
+    └──────┬──────┘ └─────┬─────┘ └─────┬──────────────┘
+           │              │              │
+           │              │       ┌──────▼──────────────┐
+           │              │       │ Post + Comment       │
+           │              │       │ Retrieval            │
+           │              │       └──────┬──────────────┘
+           │              │              │
+           │              │       ┌──────▼──────────────┐
+           │              │       │ Reddit LLM Analysis  │
+           │              │       └──────┬──────────────┘
+           │              │              │
+           └──────────────┴──────────────┘
+                          │
+                          ▼
+          ┌───────────────────────────────┐
+          │      Synthesis Agent          │
+          │  (Conflict Resolution · LLM)  │
+          └───────────────┬───────────────┘
+                          │
+                          ▼
+              ┌─────────────────────┐
+              │    Final Answer     │
+              └─────────────────────┘
 ```
 
-### Mermaid Diagram (GitHub Compatible)
+### Mermaid Diagram
 
 ```mermaid
 flowchart TD
-    U[User Query]
-    U --> LG[LangGraph Orchestrator]
+    U([👤 User Query]) --> LG[⚙️ LangGraph Orchestrator]
 
-    LG --> G[Google Search]
-    LG --> B[Bing Search]
-    LG --> R[Reddit Search]
+    LG --> G[🔍 Google Search]
+    LG --> B[📰 Bing Search]
+    LG --> R[👥 Reddit Search]
 
-    G --> GA[Google Analysis]
-    B --> BA[Bing Analysis]
+    G --> GA[🧠 Google LLM Analysis]
+    B --> BA[🧠 Bing LLM Analysis]
 
-    R --> RU[Reddit URL Selection]
-    RU --> RC[Reddit Comments Retrieval]
-    RC --> RA[Reddit Analysis]
+    R --> RU[📌 Reddit URL Selection\nStructured LLM Output]
+    RU --> RC[💬 Post & Comment Retrieval\nBright Data Snapshots]
+    RC --> RA[🧠 Reddit LLM Analysis]
 
-    GA --> S[Synthesis Agent]
+    GA --> S[🔬 Synthesis Agent]
     BA --> S
     RA --> S
 
-    S --> F[Final Answer]
-```
+    S --> F([✅ Final Answer])
 
-```
-User Query
-   │
-   ▼
-LangGraph Orchestrator
-   ├── Google Search Agent ──► Google Analysis (LLM)
-   ├── Bing Search Agent   ──► Bing Analysis (LLM)
-   └── Reddit Search Agent
-          ├── URL Selection (Structured LLM)
-          ├── Post & Comment Retrieval
-          └── Reddit Analysis (LLM)
-   │
-   ▼
-Final Synthesis Agent (LLM)
-   │
-   ▼
-Comprehensive Answer
+    style U fill:#1e293b,color:#f8fafc
+    style F fill:#166534,color:#f0fdf4
+    style S fill:#1e3a5f,color:#e0f2fe
 ```
 
 ---
 
-## 🧠 How It Works (Step-by-Step)
+## 🧠 How It Works
 
-1. **User enters a question** via CLI
-2. LangGraph launches **Google, Bing, and Reddit searches in parallel**
-3. Reddit results are filtered using a **structured LLM output** to select only high-value posts
-4. Selected Reddit posts and comments are fetched via Bright Data snapshots
-5. Each source is **analyzed independently** using specialized prompts
-6. A final **synthesis agent combines all insights** into one answer
+### Step-by-Step Pipeline
 
-This design avoids hallucination, improves coverage, and ensures **multi-perspective reasoning**.
+```
+1. User submits a question via CLI
+       │
+2. LangGraph dispatches three parallel agents:
+   ├── Google Agent  → SERP results → LLM factual analysis
+   ├── Bing Agent    → SERP results → LLM complementary analysis
+   └── Reddit Agent
+            ├── Search Reddit via Bright Data
+            ├── Structured LLM selects high-signal post URLs
+            ├── Snapshot API fetches posts + top comments
+            └── LLM extracts community sentiment & insights
+       │
+3. Synthesis Agent receives all three analyses
+   → Resolves conflicts, fills gaps, ranks perspectives
+       │
+4. Final answer delivered to user
+```
+
+### Why Parallel, Not Sequential?
+
+Sequential pipelines bottleneck on the slowest step. Parallel dispatch cuts total latency to **max(agent time)** instead of **sum(agent time)** — critical when each agent involves external API calls and LLM inference.
+
+### Why Source-Specific Prompts?
+
+A single generic prompt applied to a Reddit comment thread produces very different (and worse) results than a prompt tuned to extract **opinion, sentiment, and community consensus** from informal text. Source-aware prompting is one of the biggest levers for output quality in multi-source RAG systems.
+
+---
+
+## 🧩 Prompt Engineering Strategy
+
+| Agent | Prompt Focus | Why |
+|---|---|---|
+| 🔍 Google | Factual accuracy, authoritative sourcing | Google SERP skews toward structured, high-credibility content |
+| 📰 Bing | Enterprise & technical perspectives | Bing surfaces different indexing priorities than Google |
+| 👥 Reddit | Opinions, debates, lived experience | Reddit content is informal — requires different parsing logic |
+| 🔬 Synthesizer | Conflict resolution, structured answer | Must weigh and reconcile three different tones and formats |
+
+All prompts are centralized in `prompts.py` for easy versioning, testing, and iteration.
 
 ---
 
@@ -127,11 +179,12 @@ This design avoids hallucination, improves coverage, and ensures **multi-perspec
 ```
 Advanced-Langflow-Web-Agent/
 │
-├── main.py                  # LangGraph orchestration & CLI chatbot
-├── prompts.py               # Centralized prompt templates
-├── snapshot_operations.py   # Snapshot polling & download logic
-├── web_operations.py        # Google, Bing & Reddit data ingestion
-├── .env                     # API keys (not committed)
+├── main.py                    # LangGraph graph definition, state, CLI loop
+├── prompts.py                 # All LLM prompt templates (centralized)
+├── snapshot_operations.py     # Bright Data snapshot polling & download
+├── web_operations.py          # Google, Bing & Reddit search + ingestion
+├── requirements.txt           # Python dependencies
+├── .env.example               # Environment variable template
 └── README.md
 ```
 
@@ -139,121 +192,139 @@ Advanced-Langflow-Web-Agent/
 
 ## 🔧 Tech Stack
 
-* **Python 3.10+**
-* **LangGraph** – multi-agent orchestration
-* **OpenRouter** – LLM provider (DeepSeek-R1)
-* **Bright Data** – SERP & Reddit datasets
-* **Pydantic** – structured LLM outputs
-* **dotenv** – secure environment variables
-* **Requests** – HTTP networking
+| Layer | Technology | Role |
+|---|---|---|
+| Orchestration | LangGraph | Multi-agent state machine, parallel execution |
+| LLM Provider | OpenRouter (DeepSeek-R1) | Reasoning, analysis, structured output |
+| Web Intelligence | Bright Data | SERP APIs, Reddit snapshot scraping |
+| Data Validation | Pydantic | Structured LLM output parsing |
+| Networking | Requests | HTTP client for API calls |
+| Config | python-dotenv | Secure environment variable loading |
+| Language | Python 3.10+ | Core runtime |
 
 ---
 
-## 🔑 Environment Variables
+## 🔑 Environment Setup
 
-Create a `.env` file in the project root:
+Copy `.env.example` to `.env` and fill in your keys:
 
+```bash
+cp .env.example .env
 ```
+
+```env
 BRIGHT_DATA_API_KEY=your_brightdata_api_key
 OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-⚠️ Never commit your `.env` file to GitHub.
+> ⚠️ Never commit `.env` to version control. It is already listed in `.gitignore`.
 
 ---
 
-## ▶️ Running the Project
+## 🚀 Quick Start
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/YOUR-USERNAME/Advanced-Langflow-Web-Agent.git
+cd Advanced-Langflow-Web-Agent
+
+# 2. Create and activate a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Configure environment variables
+cp .env.example .env
+# Edit .env with your API keys
+
+# 5. Run the agent
 python main.py
 ```
 
-Then ask questions like:
+### Example Queries
 
-* "Is LangChain better than LlamaIndex?"
-* "What do developers think about Rust in production?"
-* "Latest opinions on OpenAI vs open-source LLMs"
-
----
-
-## 🧩 Prompt Engineering Strategy
-
-Each source has **dedicated prompts**:
-
-* 🔍 Google → factual & authoritative data
-* 📰 Bing → complementary & enterprise perspectives
-* 👥 Reddit → real user experiences & debates
-* 🧠 Synthesizer → conflict resolution & structured answer
-
-This separation significantly improves answer quality and transparency.
+```
+> Is LangChain better than LlamaIndex for production RAG?
+> What do engineers think about Rust vs Go for backend services?
+> Latest community opinions on GPT-4o vs open-source LLMs
+> How are developers using LangGraph in real projects?
+```
 
 ---
 
-## 💡 Why This Project Stands Out (ATS Optimized)
+## 🛡️ Design Decisions & Trade-offs
 
-**Keywords:** Agentic AI, LangGraph, LLM Orchestration, Multi-Agent Systems, Prompt Engineering, Web Scraping, Bright Data, OpenRouter, Research Automation, NLP, Python, API Integration, Data Pipelines
-
-* Designed a **multi-agent AI research system** using LangGraph
-* Implemented **parallel execution and state-based orchestration**
-* Integrated **real-time web data ingestion** (Google, Bing, Reddit)
-* Built **structured LLM outputs** with Pydantic for decision-making
-* Applied **prompt engineering best practices** per data source
-* Engineered a **fault-tolerant snapshot polling pipeline**
-* Synthesized heterogeneous data into **high-quality analytical outputs**
+| Decision | Chosen Approach | Alternative Considered | Rationale |
+|---|---|---|---|
+| Orchestration | LangGraph | LangChain chains | LangGraph supports branching, state, and parallel nodes natively |
+| LLM Output Parsing | Pydantic structured outputs | Regex / manual parsing | Type-safe, validated, and far more maintainable |
+| Reddit Scraping | Bright Data snapshots | Reddit API (PRAW) | Avoids rate limits; handles long-running scrape jobs reliably |
+| Prompt Strategy | Per-source templates | Single universal prompt | Source-specific prompts dramatically improve signal-to-noise ratio |
+| Execution Model | Parallel agents | Sequential pipeline | Reduces total latency from sum to max of agent runtimes |
 
 ---
 
-## 📘 Case Study: Building a Multi-Source Research Agent
+## 📊 Case Study: From Problem to Production
 
-### 🎯 Problem Statement
+### Problem
+Traditional AI assistants answer from a single data source — leading to hallucinations, missing community perspectives, and poor coverage of contested topics.
 
-Traditional chatbots rely on a **single data source** or static APIs, often leading to:
+### Approach
+A LangGraph agentic system that separates **data collection**, **source-specific analysis**, and **cross-source synthesis** into distinct, independently optimized stages.
 
-* Hallucinated answers
-* Lack of real user perspectives
-* Poor coverage of conflicting viewpoints
-
-### 🧠 Solution Approach
-
-This project introduces a **LangGraph-powered agentic system** that:
-
-* Runs **parallel research agents**
-* Separates **data collection, analysis, and synthesis**
-* Uses **real web and community data**
-* Produces answers grounded in **multiple independent sources**
-
-### 🛠️ Key Engineering Decisions
-
-* **LangGraph over chains** → enabled branching, merging, and state tracking
-* **Source-specific prompts** → reduced noise and hallucination
-* **Structured Reddit filtering** → avoided low-signal content
-* **Snapshot-based scraping** → reliable handling of long-running jobs
-
-### 📊 Outcome & Impact
-
-* Higher answer accuracy
-* Transparent reasoning pipeline
-* Scalable foundation for enterprise research agents
-* Production-ready architecture
+### Engineering Outcomes
+- Eliminated single-source bias via triangulated web + community data
+- Achieved fault tolerance through snapshot-based scraping (retry-safe)
+- Established a clean separation of concerns across four agent roles
+- Built a reusable, extensible foundation for enterprise research agents
 
 ---
 
-## 🚀 Future Enhancements
+## 🗺️ Roadmap
 
-* Web UI (Streamlit / Next.js)
-* Caching & rate-limit handling
-* Citation formatting & source linking
-* Additional data sources (X, Hacker News, ArXiv)
-* Async execution for faster responses
+- [ ] **Async execution** — replace `requests` with `httpx` for non-blocking I/O
+- [ ] **Web UI** — Streamlit or Next.js front-end
+- [ ] **Caching layer** — Redis-backed query result caching
+- [ ] **Source citations** — formatted references in final output
+- [ ] **Additional sources** — Hacker News, ArXiv, X (Twitter)
+- [ ] **Evaluation suite** — automated benchmarking of answer quality
+- [ ] **Docker support** — containerized deployment
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome and appreciated.
+
+```bash
+# Fork → Branch → Commit → Pull Request
+git checkout -b feature/your-feature-name
+```
+
+Please open an issue first for major changes to align on direction.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
 ---
 
 ## 👤 Author
 
+<div align="center">
+
 **Yash Brahmankar**
-AI & Python Developer | Agentic Systems Enthusiast
+*AI & Python Developer · Agentic Systems · LLM Engineering*
+
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/YOUR-USERNAME)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin)](https://linkedin.com/in/YOUR-PROFILE)
 
 ---
 
-⭐ If you like this project, consider starring the repository!
+*If this project was useful, a ⭐ goes a long way — thank you.*
+
+</div>
