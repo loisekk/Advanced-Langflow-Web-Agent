@@ -79,6 +79,7 @@ Please analyze these Bing results and extract insights that complement other sea
         return """You are an expert at analyzing social media discussions. Analyze the provided Reddit content to extract community insights and user experiences.
 
 
+
 Focus on:
 - Real user experiences and testimonials
 - Community consensus and popular opinions
