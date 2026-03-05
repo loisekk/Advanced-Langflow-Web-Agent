@@ -21,7 +21,6 @@ load_dotenv()
 
 model = "deepseek/deepseek-r1"
 
-
 class State(TypedDict):
     messages: Annotated[list, add_messages]
     user_question: str | None
