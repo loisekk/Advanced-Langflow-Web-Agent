@@ -17,7 +17,6 @@ from prompts import (
     get_synthesis_messages
 )
 
-
 load_dotenv()
 
 model = "deepseek/deepseek-r1"
