@@ -1,27 +1,49 @@
 <div align="center">
 
-# 🕵️ Advanced Langflow Web Agent
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:16213e&height=240&section=header&text=Advanced%20Web%20Agent&fontSize=48&fontColor=FFD700&fontAlignY=36&desc=Multi-Source%20AI%20Research%20Agent%20powered%20by%20LangGraph%20%26%20Bright%20Data&descAlignY=56&descAlign=50" width="100%"/>
 
-**A production-grade, multi-source AI research agent powered by LangGraph, OpenRouter, and Bright Data.**
+<br/>
 
-*Parallel intelligence gathering · Source-aware LLM reasoning · Structured synthesis*
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Orchestration-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-DeepSeek--R1-6E3FF3?style=for-the-badge)](https://openrouter.ai)
+[![Bright Data](https://img.shields.io/badge/Bright%20Data-Web%20Intelligence-00BFFF?style=for-the-badge)](https://brightdata.com)
+[![Pydantic](https://img.shields.io/badge/Pydantic-Structured%20Outputs-E92063?style=for-the-badge&logo=pydantic&logoColor=white)](https://docs.pydantic.dev)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-00FF88?style=for-the-badge)](.)
 
----
+<br/>
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![LangGraph](https://img.shields.io/badge/LangGraph-Orchestration-1C3C3C?style=flat-square&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
-[![OpenRouter](https://img.shields.io/badge/OpenRouter-DeepSeek--R1-6E3FF3?style=flat-square)](https://openrouter.ai)
-[![Bright Data](https://img.shields.io/badge/Bright%20Data-Web%20Intelligence-00BFFF?style=flat-square)](https://brightdata.com)
-[![Pydantic](https://img.shields.io/badge/Pydantic-Structured%20Outputs-E92063?style=flat-square&logo=pydantic&logoColor=white)](https://docs.pydantic.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-22c55e?style=flat-square)]()
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-orange?style=flat-square)](https://github.com/YOUR-USERNAME/Advanced-Langflow-Web-Agent/pulls)
+```
+█░█░█ █▀▀ █▄▄   ▄▀█ █▀▀ █▀▀ █▄░█ ▀█▀
+▀▄▀▄▀ ██▄ █▄█   █▀█ █▄█ ██▄ █░▀█ ░█░
+```
 
----
+> *Three agents. Three sources. One grounded answer.*
+> Production-grade agentic AI with parallel intelligence gathering, source-aware reasoning, and structured synthesis.
 
-[📖 Overview](#-overview) · [🏗️ Architecture](#-system-architecture) · [⚙️ How It Works](#-how-it-works) · [🚀 Quick Start](#-quick-start) · [📂 Structure](#-project-structure) · [🗺️ Roadmap](#-roadmap)
+<br/>
 
 </div>
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Key Capabilities](#-key-capabilities)
+- [System Architecture](#-system-architecture)
+- [How It Works](#-how-it-works)
+- [Prompt Engineering Strategy](#-prompt-engineering-strategy)
+- [Tech Stack](#-tech-stack)
+- [Environment Setup](#-environment-setup)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Design Decisions](#-design-decisions--trade-offs)
+- [Case Study](#-case-study-from-problem-to-production)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [Author](#-author)
 
 ---
 
@@ -41,13 +63,13 @@ It deploys three specialized research agents in parallel — each scraping, filt
 
 | Capability | Details |
 |---|---|
-| 🔄 Parallel Agent Execution | Google, Bing, and Reddit agents run simultaneously via LangGraph |
-| 🧠 Source-Aware LLM Reasoning | Each source uses dedicated prompts tuned for its content type |
-| 📊 Structured Reddit Filtering | Pydantic-validated LLM output selects only high-signal posts |
-| 🌐 Production Web Scraping | Bright Data SERP & snapshot APIs for reliable data ingestion |
-| 🧵 Community Insight Mining | Extracts real user opinions from Reddit threads & comments |
-| 🧩 Modular Prompt Architecture | Centralized, versioned prompt templates in `prompts.py` |
-| 💬 Interactive CLI Interface | Conversational research assistant, runnable locally |
+| 🔄 **Parallel Agent Execution** | Google, Bing, and Reddit agents run simultaneously via LangGraph |
+| 🧠 **Source-Aware LLM Reasoning** | Each source uses dedicated prompts tuned for its content type |
+| 📊 **Structured Reddit Filtering** | Pydantic-validated LLM output selects only high-signal posts |
+| 🌐 **Production Web Scraping** | Bright Data SERP & snapshot APIs for reliable data ingestion |
+| 🧵 **Community Insight Mining** | Extracts real user opinions from Reddit threads & comments |
+| 🧩 **Modular Prompt Architecture** | Centralized, versioned prompt templates in `prompts.py` |
+| 💬 **Interactive CLI Interface** | Conversational research assistant, runnable locally |
 
 ---
 
@@ -165,28 +187,12 @@ A single generic prompt applied to a Reddit comment thread produces very differe
 
 | Agent | Prompt Focus | Why |
 |---|---|---|
-| 🔍 Google | Factual accuracy, authoritative sourcing | Google SERP skews toward structured, high-credibility content |
-| 📰 Bing | Enterprise & technical perspectives | Bing surfaces different indexing priorities than Google |
-| 👥 Reddit | Opinions, debates, lived experience | Reddit content is informal — requires different parsing logic |
-| 🔬 Synthesizer | Conflict resolution, structured answer | Must weigh and reconcile three different tones and formats |
+| 🔍 **Google** | Factual accuracy, authoritative sourcing | Google SERP skews toward structured, high-credibility content |
+| 📰 **Bing** | Enterprise & technical perspectives | Bing surfaces different indexing priorities than Google |
+| 👥 **Reddit** | Opinions, debates, lived experience | Reddit content is informal — requires different parsing logic |
+| 🔬 **Synthesizer** | Conflict resolution, structured answer | Must weigh and reconcile three different tones and formats |
 
 All prompts are centralized in `prompts.py` for easy versioning, testing, and iteration.
-
----
-
-## 📂 Project Structure
-
-```
-Advanced-Langflow-Web-Agent/
-│
-├── main.py                    # LangGraph graph definition, state, CLI loop
-├── prompts.py                 # All LLM prompt templates (centralized)
-├── snapshot_operations.py     # Bright Data snapshot polling & download
-├── web_operations.py          # Google, Bing & Reddit search + ingestion
-├── requirements.txt           # Python dependencies
-├── .env.example               # Environment variable template
-└── README.md
-```
 
 ---
 
@@ -194,13 +200,13 @@ Advanced-Langflow-Web-Agent/
 
 | Layer | Technology | Role |
 |---|---|---|
-| Orchestration | LangGraph | Multi-agent state machine, parallel execution |
-| LLM Provider | OpenRouter (DeepSeek-R1) | Reasoning, analysis, structured output |
-| Web Intelligence | Bright Data | SERP APIs, Reddit snapshot scraping |
-| Data Validation | Pydantic | Structured LLM output parsing |
-| Networking | Requests | HTTP client for API calls |
-| Config | python-dotenv | Secure environment variable loading |
-| Language | Python 3.10+ | Core runtime |
+| **Orchestration** | LangGraph | Multi-agent state machine, parallel execution |
+| **LLM Provider** | OpenRouter (DeepSeek-R1) | Reasoning, analysis, structured output |
+| **Web Intelligence** | Bright Data | SERP APIs, Reddit snapshot scraping |
+| **Data Validation** | Pydantic | Structured LLM output parsing |
+| **Networking** | Requests | HTTP client for API calls |
+| **Config** | python-dotenv | Secure environment variable loading |
+| **Language** | Python 3.10+ | Core runtime |
 
 ---
 
@@ -225,10 +231,10 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR-USERNAME/Advanced-Langflow-Web-Agent.git
+git clone https://github.com/loisekk/Advanced-Langflow-Web-Agent.git
 cd Advanced-Langflow-Web-Agent
 
-# 2. Create and activate a virtual environment (recommended)
+# 2. Create and activate a virtual environment
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 
@@ -254,15 +260,31 @@ python main.py
 
 ---
 
+## 📂 Project Structure
+
+```
+Advanced-Langflow-Web-Agent/
+│
+├── main.py                    # LangGraph graph definition, state, CLI loop
+├── prompts.py                 # All LLM prompt templates (centralized)
+├── snapshot_operations.py     # Bright Data snapshot polling & download
+├── web_operations.py          # Google, Bing & Reddit search + ingestion
+├── requirements.txt           # Python dependencies
+├── .env.example               # Environment variable template
+└── README.md                  # You are here
+```
+
+---
+
 ## 🛡️ Design Decisions & Trade-offs
 
 | Decision | Chosen Approach | Alternative Considered | Rationale |
 |---|---|---|---|
-| Orchestration | LangGraph | LangChain chains | LangGraph supports branching, state, and parallel nodes natively |
-| LLM Output Parsing | Pydantic structured outputs | Regex / manual parsing | Type-safe, validated, and far more maintainable |
-| Reddit Scraping | Bright Data snapshots | Reddit API (PRAW) | Avoids rate limits; handles long-running scrape jobs reliably |
-| Prompt Strategy | Per-source templates | Single universal prompt | Source-specific prompts dramatically improve signal-to-noise ratio |
-| Execution Model | Parallel agents | Sequential pipeline | Reduces total latency from sum to max of agent runtimes |
+| **Orchestration** | LangGraph | LangChain chains | LangGraph supports branching, state, and parallel nodes natively |
+| **LLM Output Parsing** | Pydantic structured outputs | Regex / manual parsing | Type-safe, validated, and far more maintainable |
+| **Reddit Scraping** | Bright Data snapshots | Reddit API (PRAW) | Avoids rate limits; handles long-running scrape jobs reliably |
+| **Prompt Strategy** | Per-source templates | Single universal prompt | Source-specific prompts dramatically improve signal-to-noise ratio |
+| **Execution Model** | Parallel agents | Sequential pipeline | Reduces total latency from sum to max of agent runtimes |
 
 ---
 
@@ -284,13 +306,15 @@ A LangGraph agentic system that separates **data collection**, **source-specific
 
 ## 🗺️ Roadmap
 
-- [ ] **Async execution** — replace `requests` with `httpx` for non-blocking I/O
-- [ ] **Web UI** — Streamlit or Next.js front-end
-- [ ] **Caching layer** — Redis-backed query result caching
-- [ ] **Source citations** — formatted references in final output
-- [ ] **Additional sources** — Hacker News, ArXiv, X (Twitter)
-- [ ] **Evaluation suite** — automated benchmarking of answer quality
-- [ ] **Docker support** — containerized deployment
+| Enhancement | Priority |
+|---|---|
+| ⚡ Async execution — replace `requests` with `httpx` | High |
+| 🖥️ Web UI — Streamlit or Next.js front-end | High |
+| 🗄️ Caching layer — Redis-backed query result caching | Medium |
+| 📎 Source citations — formatted references in final output | Medium |
+| 🔎 Additional sources — Hacker News, ArXiv, X (Twitter) | Medium |
+| 🧪 Evaluation suite — automated benchmarking of answer quality | Low |
+| 🐳 Docker support — containerized deployment | Low |
 
 ---
 
@@ -307,24 +331,32 @@ Please open an issue first for major changes to align on direction.
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
-
----
-
-## 👤 Author
+## 👨‍💻 Author
 
 <div align="center">
 
 **Yash Brahmankar**
+
 *AI & Python Developer · Agentic Systems · LLM Engineering*
 
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/YOUR-USERNAME)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin)](https://linkedin.com/in/YOUR-PROFILE)
+<br/>
+
+[![GitHub](https://img.shields.io/badge/GitHub-loisekk-181717?style=for-the-badge&logo=github)](https://github.com/loisekk)
+[![Email](https://img.shields.io/badge/Email-yashbrahmankar95%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yashbrahmankar95@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/)
+
+<br/>
+
+⭐ **If this project was useful, a star goes a long way — thank you.**
+
+</div>
 
 ---
 
-*If this project was useful, a ⭐ goes a long way — thank you.*
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:16213e,50:1a1a2e,100:0d1117&height=140&section=footer" width="100%"/>
+
+*Built with intelligence and Python by Yash Brahmankar*
 
 </div>
