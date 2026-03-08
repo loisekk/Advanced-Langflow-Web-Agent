@@ -1,7 +1,6 @@
 <div align="center">
 
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:16213e&height=240&section=header&text=Advanced%20Web%20Agent&fontSize=48&fontColor=FFD700&fontAlignY=36&desc=Multi-Source%20AI%20Research%20Agent&descAlignY=56&descAlign=50" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a2e,50:0d2b6b,100:00b4d8&height=240&section=header&text=Advanced%20Web%20Agent&fontSize=48&fontColor=ffffff&fontAlignY=36&desc=Multi-Source%20AI%20Research%20Agent&descAlignY=56&descAlign=50" width="100%"/>
 
 <br/>
 
@@ -356,7 +355,7 @@ Please open an issue first for major changes to align on direction.
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:16213e,50:1a1a2e,100:0d1117&height=140&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00b4d8,50:0d2b6b,100:0a0a2e&height=140&section=footer" width="100%"/>
 
 *Built with intelligence and Python by Yash Brahmankar*
 
