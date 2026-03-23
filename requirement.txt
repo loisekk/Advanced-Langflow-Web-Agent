@@ -1,0 +1,28 @@
+# Core environment
+python-dotenv
+
+# HTTP requests
+requests
+
+# Type handling & validation
+pydantic
+typing-extensions
+
+# LangGraph + LangChain ecosystem
+langgraph
+langchain
+
+# OpenRouter (LLM API)
+openrouter
+
+# Optional but recommended (used indirectly in LLM workflows)
+tqdm
+
+python-dotenv==1.0.1
+requests==2.31.0
+pydantic==2.6.4
+typing-extensions==4.9.0
+langgraph==0.0.40
+langchain==0.1.14
+openrouter==1.0.0
+tqdm==4.66.2
